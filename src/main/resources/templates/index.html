@@ -8,19 +8,21 @@
 <body>
 <th:block th:if="${student ne null}">
     <p th:text="'name:'+ ${student.name}"></p>
-    <p th:text="'branch:'+ ${student.class_.className}"></p>
-    <p th:text="${student.name} +'\'s Teacher:'+${student.teacher.name}"></p>
+    <p th:text="'teacher:'+ ${student.teacher.name}"></p>
+    <p th:text="'branch:'+ ${student.teacher.branch}"></p>
 </th:block>
-<form action="/" method="post">
+<form action="/test" method="post">
     <div>
         <label for="txtStudentName">Enter the Student Name:</label>
         <input type="text" id="txtStudentName" name="student"/>
         <label for="txtTeacherName">Enter the Teacher Name:</label>
         <input type="text" id="txtTeacherName" name="teacher"/>
+        <label for="txtTeacherBranch">Enter the Teacher Branch:</label>
+        <input type="text" id="txtTeacherBranch" name="branch"/>
         <button type="submit">Send to Server</button>
     </div>
 </form>
-<p th:if="${studentId ne null}" th:text="${studentId}"></p>
-<p th:if="${teacherId ne null}" th:text="${teacherId}"></p>
+<!--<p th:if="${studentId ne null}" th:text="${studentId}"></p>-->
+<!--<p th:if="${teacherId ne null}" th:text="${teacherId}"></p>-->
 </body>
 </html>

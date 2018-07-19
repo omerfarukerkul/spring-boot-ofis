@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.database.example.demo.model;
 
 import java.io.Serializable;
@@ -21,9 +17,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- * @author OmerFaruk
- */
+
 @Entity
 @Table(name = "student", catalog = "springdatabase", schema = "", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"id_"})})

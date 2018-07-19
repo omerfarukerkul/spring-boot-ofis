@@ -1,0 +1,26 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org" lang="tr">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>StudentClasses</title>
+</head>
+<body>
+<th:block th:if="${student ne null}">
+    <p th:text="'name:'+ ${student.name}"></p>
+    <p th:text="'branch:'+ ${student.class_.className}"></p>
+    <p th:text="${student.name} +'\'s Teacher:'+${student.teacher.name}"></p>
+</th:block>
+<form action="/" method="post">
+    <div>
+        <label for="txtStudentName">Enter the Student Name:</label>
+        <input type="text" id="txtStudentName" name="student"/>
+        <label for="txtTeacherName">Enter the Teacher Name:</label>
+        <input type="text" id="txtTeacherName" name="teacher"/>
+        <button type="submit">Send to Server</button>
+    </div>
+</form>
+<p th:if="${studentId ne null}" th:text="${studentId}"></p>
+<p th:if="${teacherId ne null}" th:text="${teacherId}"></p>
+</body>
+</html>

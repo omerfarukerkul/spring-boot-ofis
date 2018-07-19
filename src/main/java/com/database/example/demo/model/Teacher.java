@@ -35,6 +35,7 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Teacher implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    @JsonIgnore
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -47,7 +48,7 @@ public class Teacher implements Serializable {
     @Column(name = "branch_", nullable = false, length = 100)
     private String branch;
     @JoinColumn(name = "class_id_", referencedColumnName = "id_", nullable = false)
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Class_ class_;
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "teacher", fetch = FetchType.LAZY)

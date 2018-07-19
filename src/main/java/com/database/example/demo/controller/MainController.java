@@ -1,5 +1,6 @@
 package com.database.example.demo.controller;
 
+import com.database.example.demo.Container;
 import com.database.example.demo.model.Class_;
 import com.database.example.demo.model.Student;
 import com.database.example.demo.model.Teacher;
@@ -34,8 +35,13 @@ public final class MainController {
 
     @ResponseBody
     @GetMapping(value = "/", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
-    public List<Student> showStudents() {
-        return studentService.findAll();
+    public Container showStudents() {
+
+        Container c  = new Container();
+        c.students = studentService.findAll();
+        c.class_s = classService.findAll();
+        c.teachers = teacherService.findAll();
+        return c;
     }
 
     @GetMapping(value = "/deneme/{path:^[\\d]*$}", produces = {MediaType.TEXT_HTML_VALUE})

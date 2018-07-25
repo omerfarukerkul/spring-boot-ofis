@@ -1,7 +1,9 @@
 package com.database.example.demo.service;
 
+import com.database.example.demo.model.Branch;
 import com.database.example.demo.model.Class_;
 import com.database.example.demo.model.Teacher;
+import com.database.example.demo.repository.BranchRepository;
 import com.database.example.demo.repository.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +15,7 @@ public final class TeacherService {
     private final TeacherRepository teacherRepository;
 
     @Autowired
-    public TeacherService(TeacherRepository teacherRepository) {
+    public TeacherService(TeacherRepository teacherRepository, BranchRepository branchRepository) {
         this.teacherRepository = teacherRepository;
     }
 
@@ -31,20 +33,16 @@ public final class TeacherService {
                 .orElse(null);
     }
 
-    public List<Teacher> findByBranch(String branch) {
-        return teacherRepository.findByBranch(branch);
-    }
-
     public boolean hasId(Integer id) {
         return teacherRepository.existsById(id);
     }
 
-    public Teacher add(String name,String branch,Class_ c){
+    public Teacher add(String name, Branch branch, Class_ c) {
 
         final Teacher t = new Teacher();
         t.setName(name);
-        t.setBranch(branch);
-        t.setClass_(c);
+        t.setBranchId(branch);
+        t.setClassId(c);
         return teacherRepository.save(t);
     }
 

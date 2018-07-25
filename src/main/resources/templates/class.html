@@ -1,0 +1,89 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org" lang="tr">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>StudentClasses</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.js"
+            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js"
+            integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container">
+    <br/>
+    <div class="row">
+        <div class="col">
+            <button type="button" class="component-add btn btn-outline-success btn-block">Add Class</button>
+        </div>
+        <div class="col">
+            <!--<form action="/removeBranchClass" method="post" class="form-horizontal">-->
+            <button type="button" class="component-removal btn btn-outline-danger btn-block">Delete Class</button>
+            <!--</form>-->
+        </div>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col">
+            <table class="table">
+                <thead>
+                <th>
+                    Class ID
+                </th>
+                <th>
+                    Class Name
+                </th>
+                <th>
+                    Class BranchName
+                </th>
+                </thead>
+                <tbody id="class_">
+                <th:block th:if="${container ne null}" th:each="c : ${container.class_s}">
+                    <tr class="item">
+                        <td th:text="${c.id}"></td>
+                        <td th:text="${c.className}"></td>
+                        <td th:text="${c.classBranch}"></td>
+                    <tr>
+                </th:block>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        $(".component-removal").on('click', function () {
+            $.ajax({
+                'type': 'post',
+                'url': '/removeBranchClass',
+                'success': function (data) {
+                    if (data.toString() === "true") {
+                        $(".item").last().remove();
+                        console.log(data.toString());
+                    } else
+                        console.log(data.toString());
+                }
+            });
+        });
+        $(".component-add").on('click', function () {
+            $.ajax({
+                'type': 'post',
+                'url': '/addBranchClass',
+                'success': function (data) {
+                    var tr = $("<tr class='item'></tr>").appendTo($("#class_"));
+                    tr.append("<td>" + data.id + "</td>");
+                    tr.append("<td>" + data.className + "</td>");
+                    tr.append("<td>" + data.classBranch + "</td>");
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

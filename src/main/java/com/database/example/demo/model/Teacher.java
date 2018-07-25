@@ -1,41 +1,32 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.database.example.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import java.io.Serializable;
-import java.util.List;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import java.io.Serializable;
+import java.util.List;
 
+/**
+ * @author OmerFaruk
+ */
 @Entity
 @Table(name = "teacher", catalog = "springdatabase", schema = "", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"id_"})})
+        @UniqueConstraint(columnNames = {"id_"})})
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Teacher.findAll", query = "SELECT t FROM Teacher t")
-    , @NamedQuery(name = "Teacher.findById", query = "SELECT t FROM Teacher t WHERE t.id = ?1")
-    , @NamedQuery(name = "Teacher.findByName", query = "SELECT t FROM Teacher t WHERE t.name = ?1")
-    , @NamedQuery(name = "Teacher.findByBranch", query = "SELECT t FROM Teacher t WHERE t.branch = ?1")})
+        @NamedQuery(name = "Teacher.findAll", query = "SELECT t FROM Teacher t")
+        , @NamedQuery(name = "Teacher.findById", query = "SELECT t FROM Teacher t WHERE t.id = ?1")
+        , @NamedQuery(name = "Teacher.findByName", query = "SELECT t FROM Teacher t WHERE t.name = ?1")})
 public class Teacher implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @JsonIgnore
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -44,14 +35,14 @@ public class Teacher implements Serializable {
     @Basic(optional = false)
     @Column(name = "name_", nullable = false, length = 50)
     private String name;
-    @Basic(optional = false)
-    @Column(name = "branch_", nullable = false, length = 100)
-    private String branch;
+    @JoinColumn(name = "branch_id_", referencedColumnName = "id", nullable = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Branch branchId;
     @JoinColumn(name = "class_id_", referencedColumnName = "id_", nullable = false)
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    private Class_ class_;
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Class_ classId;
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "teacher", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "teacherId", fetch = FetchType.LAZY)
     private List<Student> studentList;
 
     public Teacher() {
@@ -61,10 +52,9 @@ public class Teacher implements Serializable {
         this.id = id;
     }
 
-    public Teacher(Integer id, String name, String branch) {
+    public Teacher(Integer id, String name) {
         this.id = id;
         this.name = name;
-        this.branch = branch;
     }
 
     public Integer getId() {
@@ -83,20 +73,20 @@ public class Teacher implements Serializable {
         this.name = name;
     }
 
-    public String getBranch() {
-        return branch;
+    public Branch getBranchId() {
+        return branchId;
     }
 
-    public void setBranch(String branch) {
-        this.branch = branch;
+    public void setBranchId(Branch branchId) {
+        this.branchId = branchId;
     }
 
-    public Class_ getClass_() {
-        return class_;
+    public Class_ getClassId() {
+        return classId;
     }
 
-    public void setClass_(Class_ class_) {
-        this.class_ = class_;
+    public void setClassId(Class_ classId) {
+        this.classId = classId;
     }
 
     @XmlTransient
@@ -132,5 +122,5 @@ public class Teacher implements Serializable {
     public String toString() {
         return "database.Teacher[ id=" + id + " ]";
     }
-    
+
 }

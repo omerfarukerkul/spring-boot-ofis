@@ -5,14 +5,10 @@ import com.database.example.demo.model.Student;
 import com.database.example.demo.model.Teacher;
 import com.database.example.demo.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Random;
 
 @Service
 public final class StudentService {
@@ -47,8 +43,8 @@ public final class StudentService {
 
         final Student s = new Student();
         s.setName(name);
-        s.setClass_(class_);
-        s.setTeacher(teacher);
+        s.setClassId(class_);
+        s.setTeacherId(teacher);
         return studentRepository.save(s);
     }
 

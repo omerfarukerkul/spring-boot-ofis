@@ -1,23 +1,13 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.database.example.demo.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import java.io.Serializable;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 
 
 @Entity
@@ -27,8 +17,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
         @NamedQuery(name = "Student.findAll", query = "SELECT s FROM Student s")
         , @NamedQuery(name = "Student.findById", query = "SELECT s FROM Student s WHERE s.id = ?1")
-        , @NamedQuery(name = "Student.findByName", query = "SELECT s FROM Student s WHERE s.name = ?1")
-})
+        , @NamedQuery(name = "Student.findByName", query = "SELECT s FROM Student s WHERE s.name = ?1")})
 public class Student implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -41,11 +30,11 @@ public class Student implements Serializable {
     @Column(name = "name_", nullable = false, length = 50)
     private String name;
     @JoinColumn(name = "class_id", referencedColumnName = "id_", nullable = false)
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    private Class_ class_;
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Class_ classId;
     @JoinColumn(name = "teacher_id", referencedColumnName = "id_", nullable = false)
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    private Teacher teacher;
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Teacher teacherId;
 
     public Student() {
     }
@@ -75,20 +64,20 @@ public class Student implements Serializable {
         this.name = name;
     }
 
-    public Class_ getClass_() {
-        return class_;
+    public Class_ getClassId() {
+        return classId;
     }
 
-    public void setClass_(Class_ class_) {
-        this.class_ = class_;
+    public void setClassId(Class_ classId) {
+        this.classId = classId;
     }
 
-    public Teacher getTeacher() {
-        return teacher;
+    public Teacher getTeacherId() {
+        return teacherId;
     }
 
-    public void setTeacher(Teacher teacher) {
-        this.teacher = teacher;
+    public void setTeacherId(Teacher teacherId) {
+        this.teacherId = teacherId;
     }
 
     @Override

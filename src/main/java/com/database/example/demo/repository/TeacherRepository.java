@@ -14,5 +14,4 @@ public interface TeacherRepository extends CrudRepository<Teacher, Integer> {
 
     List<Teacher> findByName(String name);
 
-    List<Teacher> findByBranch(String branch);
 }

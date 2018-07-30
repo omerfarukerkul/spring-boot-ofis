@@ -17,7 +17,7 @@ import java.util.List;
  * @author OmerFaruk
  */
 @Entity
-@Table(name = "teacher", catalog = "springdatabase", schema = "", uniqueConstraints = {
+@Table(name = "teacher", catalog = "", schema = "", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"id_"})})
 @XmlRootElement
 @NamedQueries({

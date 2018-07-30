@@ -14,7 +14,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name = "branch", catalog = "springdatabase", schema = "", uniqueConstraints = {
+@Table(name = "branch", catalog = "", schema = "", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"branch_name"})
         , @UniqueConstraint(columnNames = {"id"})})
 @XmlRootElement

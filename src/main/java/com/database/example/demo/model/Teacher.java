@@ -24,7 +24,7 @@ import java.util.List;
         @NamedQuery(name = "Teacher.findAll", query = "SELECT t FROM Teacher t")
         , @NamedQuery(name = "Teacher.findById", query = "SELECT t FROM Teacher t WHERE t.id = ?1")
         , @NamedQuery(name = "Teacher.findByName", query = "SELECT t FROM Teacher t WHERE t.name = ?1")})
-public class Teacher implements Serializable {
+public final class Teacher implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id

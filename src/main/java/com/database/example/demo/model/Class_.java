@@ -23,7 +23,7 @@ import java.util.List;
         , @NamedQuery(name = "Class_.findById", query = "SELECT c FROM Class_ c WHERE c.id = ?1")
         , @NamedQuery(name = "Class_.findByClassName", query = "SELECT c FROM Class_ c WHERE c.className = ?1")
         , @NamedQuery(name = "Class_.findByClassBranch", query = "SELECT c FROM Class_ c WHERE c.classBranch = ?1")})
-public class Class_ implements Serializable {
+public final class Class_ implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id

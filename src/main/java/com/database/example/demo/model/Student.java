@@ -18,7 +18,7 @@ import java.io.Serializable;
         @NamedQuery(name = "Student.findAll", query = "SELECT s FROM Student s")
         , @NamedQuery(name = "Student.findById", query = "SELECT s FROM Student s WHERE s.id = ?1")
         , @NamedQuery(name = "Student.findByName", query = "SELECT s FROM Student s WHERE s.name = ?1")})
-public class Student implements Serializable {
+public final class Student implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id

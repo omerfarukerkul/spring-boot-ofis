@@ -22,7 +22,7 @@ import java.util.List;
         @NamedQuery(name = "Branch.findAll", query = "SELECT b FROM Branch b")
         , @NamedQuery(name = "Branch.findById", query = "SELECT b FROM Branch b WHERE b.id = ?1")
         , @NamedQuery(name = "Branch.findByBranchName", query = "SELECT b FROM Branch b WHERE b.branchName = ?1")})
-public class Branch implements Serializable, Comparable<Branch> {
+public final class Branch implements Serializable, Comparable<Branch> {
 
     private static final long serialVersionUID = 1L;
     @Id
